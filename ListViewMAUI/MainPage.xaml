@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ListViewMAUI.MainPage"
+             xmlns:local="clr-namespace:ListViewMAUI"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView">
+    <ContentPage.BindingContext>
+        <local:ViewModel x:Name="viewmodel" />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <local:DynamicToPathValueConverter x:Key="converter" />
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Text="Binding ItemsSource from JSON File"
+               BackgroundColor="SlateBlue"
+               FontSize="18"
+               FontAttributes="Bold"
+               TextColor="White"
+               VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Center" />
+        <syncfusion:SfListView x:Name="listView"
+                               ItemSize="70"
+                               ItemSpacing="5"
+                               Grid.Row="1"
+                               BackgroundColor="AliceBlue"
+                               ItemsSource="{Binding ItemsSource}">
+            <syncfusion:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0"
+                                   Text="{Binding Converter={StaticResource converter}, ConverterParameter=Value1}"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"
+                                   FontSize="16"
+                                   FontAttributes="Bold" />
+                            <Label Grid.Column="1"
+                                   Text="{Binding Converter={StaticResource converter}, ConverterParameter=Value2}"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"
+                                   FontSize="16"
+                                   FontAttributes="Bold" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </syncfusion:SfListView.ItemTemplate>
+        </syncfusion:SfListView>
+
+    </Grid>
+</ContentPage>
